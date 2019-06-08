@@ -1,12 +1,57 @@
 import sys
+import nltk
+import pandas as pd
+from collections import defaultdict
+import pickle
+
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.metrics import classification_report, fbeta_score, precision_score, recall_score
+from sklearn.tree import DecisionTreeClassifier
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from sqlalchemy import create_engine
+
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 def load_data(database_filepath):
-    pass
-
+    '''
+    Function to load table from database into a dataframe
+    Args: database_filepath = string containing filepath to sqlite database
+    Returns: X = dataframe containaing all messages
+             Y = dataframe containing all target labels
+             category_names = list of strings
+    '''
+    
+    engine = create_engine(database_filepath)
+    df = pd.read_sql('SELECT * FROM InsertTableName', con=engine)
+    X = df['message']
+    Y = df[df.columns[4:]]
+    category_names = Y.columns
+    
+    return X, Y, category_names
 
 def tokenize(text):
-    pass
+    '''
+    Function splitting messages into words, converting to lower case and removing punctuation
+    Args: text = message in form of string
+    Return: clean_tokens = list of cleaned tokens
+    '''
+    
+    tokens = word_tokenize(text)
+    lemmatizer = WordNetLemmatizer()
+    
+    clean_tokens = []
+    for token in tokens:
+        clean_token = lemmatizer.lemmatize(token).lower().strip()
+        clean_tokens.append(clean_token)
+        
+    return clean_tokens
 
 
 def build_model():
