@@ -28,8 +28,13 @@ def load_data(database_filepath):
              category_names = list of strings
     '''
     
+    # load data from database
     engine = create_engine(database_filepath)
-    df = pd.read_sql('SELECT * FROM InsertTableName', con=engine)
+    # Get table names
+    table = engine.table_names()
+
+    # Read in the sqlite table
+    df = pd.read_sql('SELECT * FROM {}'.format(table[0]), con=engine)
     X = df['message']
     Y = df[df.columns[4:]]
     category_names = Y.columns
@@ -55,8 +60,21 @@ def tokenize(text):
 
 
 def build_model():
-    pass
+    '''
+    Function to create machine learning model
+    Args: None
+    Returns: model = model pipeline
+    '''
+    
+    # text processing and model pipeline
 
+
+    # define parameters for GridSearchCV
+
+
+    # create gridsearch object and return as final model pipeline
+
+    return model
 
 def evaluate_model(model, X_test, Y_test, category_names):
     pass
