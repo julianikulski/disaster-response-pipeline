@@ -77,10 +77,9 @@ def build_model():
 
     # Define parameters for GridSearchCV
     parameters = {
-        'vect__max_df': [0.7, 1],
+        'vect__max_df': [0.7, 0.9, 1],
         'tfidf__use_idf': [True, False],
-        'adaboost__estimator__n_estimators': [20, 50],
-        'adaboost__estimator__learning_rate': [.5, 1],
+        'adaboost__estimator__n_estimators': [20, 50]
     }
 
     # Create gridsearch object and return as final model pipeline
@@ -101,11 +100,11 @@ def evaluate_model(model, X_test, Y_test, category_names):
     # Return the predictions for the optimal parameter combination
     y_pred = model.predict(X_test)
     # Convert y_pred from array to dataframe
-    y_pred = pd.DataFrame(y_pred, columns=df.columns[4:])
+    y_pred = pd.DataFrame(y_pred, columns=category_names)
     
     # Print the results of the predictive algorithm
     for col in y_pred.columns:
-        print(col, classification_report(y_test[col], y_pred[col]))
+        print(col, classification_report(Y_test[col], y_pred[col]))
 
 def save_model(model, model_filepath):
     '''
