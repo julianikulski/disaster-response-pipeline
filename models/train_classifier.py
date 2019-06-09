@@ -29,12 +29,12 @@ def load_data(database_filepath):
     '''
     
     # Load data from database
-    engine = create_engine(database_filepath)
+    engine = create_engine('sqlite:///'+database_filepath)
     # Get table names
     table = engine.table_names()
 
     # Read in the sqlite table
-    df = pd.read_sql('SELECT * FROM {}'.format(table[0]), con=engine)
+    df = pd.read_sql_table(table[0], con=engine)
     X = df['message']
     Y = df[df.columns[4:]]
     category_names = Y.columns
@@ -69,14 +69,14 @@ def build_model():
     '''
     
     # Text processing and model pipeline
-    pipeline_binary = Pipeline([
+    pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
         ('adaboost', MultiOutputClassifier(AdaBoostClassifier()))
     ])
 
     # Define parameters for GridSearchCV
-    parameters_ada = {
+    parameters = {
         'vect__max_df': [0.7, 0.9, 1],
         'vect__binary': [True, False], # setting this to True will introduce onehot encoding on the vectorization level
         'tfidf__use_idf': [True, False],
@@ -85,7 +85,7 @@ def build_model():
     }
 
     # Create gridsearch object and return as final model pipeline
-    model = GridSearchCV(pipeline_adaboost, param_grid=parameters_ada, cv=3)
+    model = GridSearchCV(pipeline, param_grid=parameters, cv=3)
 
     return model
 
