@@ -57,6 +57,9 @@ def clean_data(df):
     # Drop duplicates
     df.drop_duplicates(subset='message', keep=False, inplace=True)
     
+    # Remove missing values
+    df = df.dropna(axis=0, subset=df.columns[4:], how='any')
+    
     return df
 
 
