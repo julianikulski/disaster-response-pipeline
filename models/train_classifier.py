@@ -28,7 +28,7 @@ def load_data(database_filepath):
              category_names = list of strings
     '''
     
-    # load data from database
+    # Load data from database
     engine = create_engine(database_filepath)
     # Get table names
     table = engine.table_names()
@@ -48,10 +48,12 @@ def tokenize(text):
     Return: clean_tokens = list of cleaned tokens
     '''
     
+    # Tokenize message into words and initialize lemmatizer
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
     
     clean_tokens = []
+    # Lemmatize words, convert them to lower case and strip whitespace
     for token in tokens:
         clean_token = lemmatizer.lemmatize(token).lower().strip()
         clean_tokens.append(clean_token)
@@ -66,19 +68,40 @@ def build_model():
     Returns: model = model pipeline
     '''
     
-    # text processing and model pipeline
+    # Text processing and model pipeline
+    pipeline_binary = Pipeline([
+        ('vect', CountVectorizer(tokenizer=tokenize)),
+        ('tfidf', TfidfTransformer()),
+        ('adaboost', MultiOutputClassifier(AdaBoostClassifier()))
+    ])
 
+    # Define parameters for GridSearchCV
+    parameters_ada = {
+        'vect__max_df': [0.7, 0.9, 1],
+        'vect__binary': [True, False], # setting this to True will introduce onehot encoding on the vectorization level
+        'tfidf__use_idf': [True, False],
+        'adaboost__estimator__n_estimators': [10, 20, 50],
+        'adaboost__estimator__learning_rate': [.5, 1],
+    }
 
-    # define parameters for GridSearchCV
-
-
-    # create gridsearch object and return as final model pipeline
+    # Create gridsearch object and return as final model pipeline
+    model = GridSearchCV(pipeline_adaboost, param_grid=parameters_ada, cv=3)
 
     return model
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+    '''
+    Function to train the model and output predicted labels
+    Args: model = machine learning model
+          X_test = dataframe with test data of X
+          Y_test = dataframe with test data of Y
+          category_names = list of names for the target labels
+    Returns: None
+    '''
 
+    # Fit the grid search model and return the predictions for the optimal parameter combination
+    cv_ada.fit(X_train, y_train)
+    model = cv_ada.predict(X_test)
 
 def save_model(model, model_filepath):
     pass
