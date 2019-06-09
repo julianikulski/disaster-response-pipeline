@@ -77,10 +77,9 @@ def build_model():
 
     # Define parameters for GridSearchCV
     parameters = {
-        'vect__max_df': [0.7, 0.9, 1],
-        'vect__binary': [True, False], # setting this to True will introduce onehot encoding on the vectorization level
+        'vect__max_df': [0.7, 1],
         'tfidf__use_idf': [True, False],
-        'adaboost__estimator__n_estimators': [10, 20, 50],
+        'adaboost__estimator__n_estimators': [20, 50],
         'adaboost__estimator__learning_rate': [.5, 1],
     }
 
@@ -117,8 +116,7 @@ def save_model(model, model_filepath):
     '''
     
     # Filename of the pickle file
-    filename = 'adaboost_ml_pipeline'
-    pickle.dump(pipeline_adaboost, open(filename, 'wb'))
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
