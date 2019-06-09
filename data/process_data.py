@@ -69,9 +69,9 @@ def save_data(df, database_filename):
     '''
     
     # Create sqlite database
-    engine = create_engine('sqlite:///InsertDatabaseName.db')
+    engine = create_engine('sqlite:///'+database_filename)
     # Save dataframe to table in database
-    df.to_sql('InsertTableName', engine, if_exists='replace', index=False)  
+    df.to_sql('DataTable', engine, if_exists='replace', index=False)  
 
 
 def main():
