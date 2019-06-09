@@ -99,12 +99,26 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Returns: None
     '''
 
-    # Fit the grid search model and return the predictions for the optimal parameter combination
-    cv_ada.fit(X_train, y_train)
-    model = cv_ada.predict(X_test)
+    # Return the predictions for the optimal parameter combination
+    y_pred = model.predict(X_test)
+    # Convert y_pred from array to dataframe
+    y_pred = pd.DataFrame(y_pred, columns=df.columns[4:])
+    
+    # Print the results of the predictive algorithm
+    for col in y_pred.columns:
+        print(col, classification_report(y_test[col], y_pred[col]))
 
 def save_model(model, model_filepath):
-    pass
+    '''
+    Function to save the model as a pickled file
+    Args: model = machine learning model
+          model_filepath = string containing the name to save the model as
+    Returns: None
+    '''
+    
+    # Filename of the pickle file
+    filename = 'adaboost_ml_pipeline'
+    pickle.dump(pipeline_adaboost, open(filename, 'wb'))
 
 
 def main():
