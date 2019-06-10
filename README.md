@@ -33,4 +33,3 @@ The files `ETL Pipeline Preparation.ipynb` and `ML Pipeline Preparation.ipynb` a
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 The data used for the analysis comes from Figure Eight and has been supplied by [Udacity](https://eu.udacity.com/legal/terms-of-use). Feel free to use the code as you please and use it for other dataset containing messages.
-
