@@ -14,6 +14,8 @@ The code requires Python versions of 3.* and general libraries available through
 ## Project Motivation <a name="motivation"></a>
 While a natural or other disaster is happening, millions of messages will be sent via social media and it is very difficult for disaster relief workers to determine which messages are relevant and where help needs to be sent. This webapp creates an easy-to-use interface that runs on a machine learning model which categorizes new messages into different categories and helps workers determine whether and what help is needed.
 
+![Screenshot of the webapp](app/static/img/webapp.PNG)
+
 ## Instructions <a name="instructions"></a>
 
 1. Run the following commands in the project's root directory to set up your database and model.
@@ -27,4 +29,3 @@ While a natural or other disaster is happening, millions of messages will be sen
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 The data used for the analysis comes from Figure Eight and has been supplied by [Udacity](https://eu.udacity.com/legal/terms-of-use). Feel free to use the code as you please and use it for other dataset containing messages.
-
