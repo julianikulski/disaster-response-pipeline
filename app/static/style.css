@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+body { 
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom,#0099ff 0,#0099ff 100%);
+  border-color: #0099ff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+.btn-primary {
+  background-color: #0099ff;
+  border-color: #0099ff;
+  background-image: linear-gradient(to bottom,#0099ff 0,#0099ff 100%);
+  background-image: -webkit-linear-gradient(top,#0099ff 0,#0099ff 100%);
+  background-image: -o-linear-gradient(top,#0099ff 0,#0099ff 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#0099ff),to(#0099ff));
+  margin: 20px 0 20px 0;
+}
+
+
+.btn:active, .btn:hover, .btn:focus, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+  background-color: #80d4ff;
+  border-color: #80d4ff;
+  background-image: linear-gradient(to bottom,#80d4ff 0,#80d4ff 100%);
+  background-image: -webkit-linear-gradient(top,#80d4ff 0,#80d4ff 100%);
+  background-image: -o-linear-gradient(top,#80d4ff 0,#80d4ff 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#80d4ff),to(#80d4ff));
+}
+
+.list-group-item-success {
+    color: #0099ff;
+    background-color: #99ddff;
+
