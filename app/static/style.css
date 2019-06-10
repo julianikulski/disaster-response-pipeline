@@ -40,4 +40,12 @@ body {
 .list-group-item-success {
     color: #0099ff;
     background-color: #99ddff;
+}
+
+#graphs {
+	margin-top: 40px;
+  	margin-bottom: 40px;
+}
+
+  
 
